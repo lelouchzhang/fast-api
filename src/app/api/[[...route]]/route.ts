@@ -27,7 +27,11 @@ app.get("/search", async (c) => {
 
     const query = c.req.query("q")?.toUpperCase();
     if (!query) {
-      return c.json({ message: "无效的查询参数" }, { status: 400 });
+      return c.json({
+        results: [],
+        message: "请输入搜索内容",
+        duration: 0,
+      });
     }
 
     const res = [];
@@ -47,7 +51,7 @@ app.get("/search", async (c) => {
     const end = performance.now();
     return c.json({
       results: res,
-      durations: end - start,
+      duration: end - start,
     });
   } catch (error) {
     console.error(error);
