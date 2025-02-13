@@ -1,6 +1,6 @@
 name = "fastapi"
-compatibility_date = "2024-04-02"
+compatibility_date = "2025-02-13"
 
 [vars]
-UPSTASH_REDIS_REST_TOKEN = "..."
-UPSTASH_REDIS_REST_URL = "..."
+UPSTASH_REDIS_REST_TOKEN = "ATaVAAIjcDE5MzE0Y2RiN2QzMzQ0MzgxOTkxOWQ3NzBhZGI0YzQ1MXAxMA"
+UPSTASH_REDIS_REST_URL = "https://precious-tuna-13973.upstash.io"
