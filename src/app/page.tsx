@@ -19,7 +19,10 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!input) setSearchResults(undefined);
+      if (!input) {
+        setSearchResults(undefined);
+        return;
+      }
       const res = await fetch(`/api/search?q=${input}`);
       const data = (await res.json()) as {
         results: string[];

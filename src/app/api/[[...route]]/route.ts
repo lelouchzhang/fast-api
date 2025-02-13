@@ -27,18 +27,14 @@ app.get("/search", async (c) => {
 
     const query = c.req.query("q")?.toUpperCase();
     if (!query) {
-      return c.json({
-        results: [],
-        message: "请输入搜索内容",
-        duration: 0,
-      });
+      return c.json({ message: "Invalid search query" }, { status: 400 });
     }
 
     const res = [];
     const rank = await redis.zrank("terms", query);
 
     if (rank !== null && rank !== undefined) {
-      const temp = await redis.zrange<string[]>("terms", rank, rank + 100);
+      const temp = await redis.zrange<string[]>("terms", rank, rank + 500);
 
       for (const el of temp) {
         if (!el.startsWith(query)) break;
@@ -55,7 +51,10 @@ app.get("/search", async (c) => {
     });
   } catch (error) {
     console.error(error);
-    c.json({ results: [], message: "something wents wrong" }, { status: 500 });
+    return c.json(
+      { results: [], message: "something wents wrong" },
+      { status: 500 }
+    );
   }
 });
 
